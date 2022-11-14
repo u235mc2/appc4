@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 16.0,
             ),
             ElevatedButton(
-                onPressed: (){}, child: const Text("Inciar Sesión")),
+                onPressed: (){}, child: const Text("Iniciar Sesión")),
             TextButton(
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(

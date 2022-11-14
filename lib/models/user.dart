@@ -3,11 +3,11 @@ class User {
   var _email;
   var _password;
   var _genre;
-  var _favorite;
-  var _bornDate;
+  var _favoritos;
+  var _date;
 
-  User(this._name, this._email, this._password, this._genre, this._favorite,
-      this._bornDate);
+  User(this._name, this._email, this._password, this._genre, this._favoritos,
+      this._date);
 
   get name => _name;
 
@@ -17,16 +17,16 @@ class User {
 
   get email => _email;
 
-  get bornDate => _bornDate;
+  get date => _date;
 
-  set bornDate(value) {
-    _bornDate = value;
+  set date(value) {
+    _date = value;
   }
 
-  get favorite => _favorite;
+  get favoritos => _favoritos;
 
-  set favorite(value) {
-    _favorite = value;
+  set favoritos(value) {
+    _favoritos = value;
   }
 
   get genre => _genre;

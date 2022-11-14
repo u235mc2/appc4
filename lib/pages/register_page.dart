@@ -1,3 +1,4 @@
+import 'package:appfinal/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -55,21 +56,36 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  void _showMsg(String msg) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+        SnackBar(content: Text(msg),
+          action: SnackBarAction(
+            label: "Aceptar", onPressed: scaffold.hideCurrentSnackBar),
+          ),
+        );
+  }
+
 
   void _onRegisterButtonClicked(){
     setState(() {
-      String genre = "Masculino";
-      if (_genre == Genre.femenino){
-        genre = "Femenino";
+      if (_password.text == _repPassword.text) {
+        String genre = "Masculino";
+        String favoritos = "";
+
+        if (_genre == Genre.femenino) {
+          genre = "Femenino";
+        }
+
+        if (_aventura) favoritos = "$favoritos Aventura";
+        if (_ecologico) favoritos = "$favoritos Ecológico";
+        if (_arquitectonico) favoritos = "$favoritos Arquitectónico";
+        if (_arqueologico) favoritos = "$favoritos Arqueológico";
+        var user = User(
+            _name.text, _email.text, _password.text, _genre, favoritos, _date);
+      } else {
+        _showMsg("Las contraseñas deben ser iguales");
       }
-
-      String favoritos = "";
-      if (_aventura) favoritos = "$favoritos Aventura";
-      if (_ecologico) favoritos = "$favoritos Ecológico";
-      if (_arquitectonico) favoritos = "$favoritos Arquitectónico";
-      if (_arqueologico) favoritos = "$favoritos Arqueológico";
-
-      _data = "Nombre: ${_name.text} \nCorreo electrónico: ${_email.text} \nGénero: $genre \nTursimo Preferido: $favoritos \nFecha de Nacimiento: $_date";
     });
 
   }
