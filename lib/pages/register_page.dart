@@ -1,5 +1,7 @@
 import 'package:appfinal/models/user.dart';
 import 'package:appfinal/pages/login_page.dart';
+import 'package:appfinal/repository/firebase_api.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +20,8 @@ class RegisterPage extends StatefulWidget {
 enum Genre{ masculino, femenino }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final FirebaseApi _firebaseApi = FirebaseApi();
 
   final _name = TextEditingController();
   final _email = TextEditingController();

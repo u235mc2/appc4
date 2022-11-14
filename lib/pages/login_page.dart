@@ -19,7 +19,13 @@ class _LoginPageState extends State<LoginPage> {
 
   User userLoad = User.Empty();
 
-  getUser() async{
+  @override
+  void initState(){
+    _getUser();
+    super.initState();
+  }
+
+  _getUser() async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Map<String, dynamic> userMap = jsonDecode(prefs.getString("user")!);
   userLoad = User.fromJson(userMap);
