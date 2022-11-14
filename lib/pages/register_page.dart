@@ -24,8 +24,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _password = TextEditingController();
   final _repPassword = TextEditingController();
 
-  String _data = "Información: ";
-
   Genre? _genre = Genre.masculino;
 
   bool _aventura = false;
@@ -89,6 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
         if (_ecologico) favoritos = "$favoritos Ecológico";
         if (_arquitectonico) favoritos = "$favoritos Arquitectónico";
         if (_arqueologico) favoritos = "$favoritos Arqueológico";
+
         var user = User(
             _name.text, _email.text, _password.text, genre, favoritos, _date);
         saveUser(user);
@@ -249,12 +248,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     _onRegisterButtonClicked();
                   },
                   child: const Text("Registrarse"),
-                ),
-                Text(
-                    _data,
-                style: const TextStyle(
-                  fontSize: 12, fontStyle: FontStyle.italic
-                ),
                 ),
               ],
             ),
