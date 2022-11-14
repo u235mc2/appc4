@@ -9,6 +9,23 @@ class User {
   User(this._name, this._email, this._password, this._genre, this._favoritos,
       this._date);
 
+  User.fromJson(Map<String , dynamic> json):
+      _name = json["name"],
+      _email = json["email"],
+      _password = json["password"],
+      _genre = json["genre"],
+      _favoritos = json["favorites"],
+      _date = json["bornDate"];
+
+  Map<String, dynamic> ToJson() => {
+    "name" : _name,
+    "email" : _email,
+    "password" : _password,
+    "genre" : _genre,
+    "favorites" : _favoritos,
+    "bornDate" : _date
+  };
+
   get name => _name;
 
   set name(value) {
