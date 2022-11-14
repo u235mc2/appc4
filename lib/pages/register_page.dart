@@ -1,4 +1,5 @@
 import 'package:appfinal/models/user.dart';
+import 'package:appfinal/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -69,6 +70,10 @@ class _RegisterPageState extends State<RegisterPage> {
         );
   }
 
+  void saveUser(User user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("user", jsonEncode(user));
+  }
 
   void _onRegisterButtonClicked(){
     setState(() {
@@ -85,7 +90,9 @@ class _RegisterPageState extends State<RegisterPage> {
         if (_arquitectonico) favoritos = "$favoritos Arquitectónico";
         if (_arqueologico) favoritos = "$favoritos Arqueológico";
         var user = User(
-            _name.text, _email.text, _password.text, _genre, favoritos, _date);
+            _name.text, _email.text, _password.text, genre, favoritos, _date);
+        saveUser(user);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
       } else {
         _showMsg("Las contraseñas deben ser iguales");
       }
