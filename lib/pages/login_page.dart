@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState(){
-    _getUser();
+    //_getUser();
     super.initState();
   }
 

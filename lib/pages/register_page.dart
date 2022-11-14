@@ -73,9 +73,20 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void saveUser(User user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("user", jsonEncode(user));
+    //SharedPreferences prefs = await SharedPreferences.getInstance();
+    //prefs.setString("user", jsonEncode(user));
+  var result = await _firebaseApi.registerUser(user.email, user.password);
+  String msg = "";
+  if (result == "invalid-email") { msg = "El correo electrónico está mal escrito";} else
+  if (result == "weak-password") { msg = "La contraseña debe tener mínimo 6 crácteres";} else
+  if (result == "email-already-in-use") { msg = "El correo ya está registrado";} else
+  if (result == "network-request-failed") { msg = "Verifique su conexión a Internet";} else
+    msg = "Registro exitoso de usuario";
+
+
+  _showMsg(msg);
   }
+
 
   void _onRegisterButtonClicked(){
     setState(() {
