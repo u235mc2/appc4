@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:appfinal/models/user.dart';
 import 'package:appfinal/pages/home_page.dart';
 import 'package:appfinal/pages/register_page.dart';
+import 'package:appfinal/repository/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   final _password = TextEditingController();
 
   User userLoad = User.Empty();
+
+  final FirebaseApi _firebaseApi = FirebaseApi();
+
 
   @override
   void initState(){
@@ -41,11 +45,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _validateUser(){
-    if(_email.text == userLoad.email && _password.text == userLoad.password){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+  void _validateUser() async{
+    if(_email.text.isEmpty && _password.text.isEmpty){
+      _showMsg("Digite su correo y contraseña");
     } else {
+      var result = await _firebaseApi.logInUser(_email.text, _password.text);
+      String msg = "";
+      if (result == "invalid-email") { msg = "El correo electrónico está mal escrito";} else
+      if (result == "wrong-password") { msg = "Correo o Contraseña incorrecta";} else
+      if (result == "network-request-failed") { msg = "Verifique su conexión a Internet";} else
+        msg = "Hola!!!";
       _showMsg("Correo o contraseña incorrecta!");
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:appfinal/firebase_options.dart';
 import 'package:appfinal/pages/login_page.dart';
+import 'package:appfinal/pages/museos_page.dart';
 import 'package:appfinal/pages/register_page.dart';
 import 'package:appfinal/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
